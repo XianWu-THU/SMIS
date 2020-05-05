@@ -437,6 +437,8 @@ class SketchGenerator(BaseNetwork):
         self.sw, self.sh = self.compute_latent_vector_size(opt)
         self.fc = nn.Conv2d(opt.semantic_nc * 8, 8 * nf, kernel_size=3, padding=1, groups=8)
         self.sc = nn.Conv2d(1, 8 * nf, kernel_size=3, padding=1)
+        print(nf)
+        print(self.opt.semantic_nc)
         self.head_0 = SPADEV2ResnetBlock(16 * nf, 16 * nf, opt, self.opt.semantic_nc)
 
         self.G_middle_0 = SPADEV2ResnetBlock(16 * nf, 16 * nf, opt, self.opt.semantic_nc)
