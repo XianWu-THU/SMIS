@@ -194,11 +194,9 @@ class SmisModel(torch.nn.Module):
         return z, mu, logvar
 
     def trans_img(self, input_semantics, real_image):
-        if not self.opt.no_instance:
-            input_semantics = input_semantics[:, :-1, :, :]
         images = None
         seg_range = input_semantics.size()[1]
-        if self.opt.dataset_mode == 'cityscapes':
+        if self.opt.dataset_mode == 'cityscapes' or not self.opt.no_instance:
             seg_range -= 1
         for i in range(input_semantics.size(0)):
             resize_image = None
