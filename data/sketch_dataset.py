@@ -32,5 +32,7 @@ class SketchDataset(Pix2pixDataset):
 
         image_dir = os.path.join(root, 'img', phase)
         image_paths = make_dataset(image_dir, recursive=False)
-        instance_paths = []
+
+        instance_dir = os.path.join(root, 'sketch', phase)
+        instance_paths = make_dataset(instance_dir, recursive=False)
         return label_paths, image_paths, instance_paths

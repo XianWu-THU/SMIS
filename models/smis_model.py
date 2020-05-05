@@ -131,8 +131,9 @@ class SmisModel(torch.nn.Module):
         # concatenate instance map if it exists
         if not self.opt.no_instance:
             inst_map = data['instance']
-            instance_edge_map = self.get_edges(inst_map)
-            input_semantics = torch.cat((input_semantics, instance_edge_map), dim=1)
+            # instance_edge_map = self.get_edges(inst_map)
+            # input_semantics = torch.cat((input_semantics, instance_edge_map), dim=1)
+            input_semantics = torch.cat((input_semantics, inst_map), dim=1)
 
         return input_semantics, data['image']
 
@@ -193,6 +194,8 @@ class SmisModel(torch.nn.Module):
         return z, mu, logvar
 
     def trans_img(self, input_semantics, real_image):
+        if not self.opt.no_instance:
+            input_semantics = input_semantics[:, :-1, :, :]
         images = None
         seg_range = input_semantics.size()[1]
         if self.opt.dataset_mode == 'cityscapes':
