@@ -25,6 +25,8 @@ class ConvEncoder(BaseNetwork):
             ndf = 151 * 4
         elif opt.dataset_mode == 'deepfashion':
             ndf = 256
+        elif opt.dataset_mode == 'sketch':
+            ndf = opt.ngf
         norm_layer = get_nonspade_norm_layer(opt, opt.norm_E)
         self.layer1 = norm_layer(nn.Conv2d(self.opt.semantic_nc * 3, ndf, kw, stride=2, padding=pw, groups=self.opt.semantic_nc))
         self.layer2 = norm_layer(nn.Conv2d(ndf * 1, ndf * 2, kw, stride=2, padding=pw, groups=self.opt.semantic_nc))
