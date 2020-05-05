@@ -103,6 +103,14 @@ class GROUP_SPADE(nn.Module):
             )
             self.mlp_gamma = nn.Conv2d(nhidden, norm_nc, kernel_size=ks, padding=pw, groups=group_num)
             self.mlp_beta = nn.Conv2d(nhidden, norm_nc, kernel_size=ks, padding=pw, groups=group_num)
+        elif data_mode == 'sketch':
+            nhidden = 64
+            self.mlp_shared = nn.Sequential(
+                nn.Conv2d(seg_in_dim, nhidden, kernel_size=ks, padding=pw, groups=group_num),
+                nn.ReLU()
+            )
+            self.mlp_gamma = nn.Conv2d(nhidden, norm_nc, kernel_size=ks, padding=pw, groups=group_num)
+            self.mlp_beta = nn.Conv2d(nhidden, norm_nc, kernel_size=ks, padding=pw, groups=group_num)
         elif data_mode == 'cityscapes':
             nhidden = label_nc * group_num
             # print(nhidden)
