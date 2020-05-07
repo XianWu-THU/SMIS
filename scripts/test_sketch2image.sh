@@ -1,0 +1,1 @@
+python test.py --name fashion_sketch --dataset_mode sketch --dataroot ./datasets/fashion2/ --netG sketch --gpu_ids 0 --ngf 64 --batchSize 4 --model smis
